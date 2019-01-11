@@ -1,9 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { CommunityMap } from './components/CommunityMap';
 
-import { Hello } from './components/Hello';
-
-ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
-    document.getElementById('netizen'),
-);
+ReactDOM.render(<CommunityMap />, document.getElementById('netizen'));
