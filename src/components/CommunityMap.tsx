@@ -24,6 +24,34 @@ const mapStyle = css`
     width: 100%;
 `;
 
+const places: mapboxgl.Layer = {
+    id: 'places',
+    type: 'symbol',
+    source: {
+        type: 'geojson',
+        data: {
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    properties: {
+                        description: 'My favourite place!',
+                        icon: 'star',
+                    },
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [-0.14, 51.44],
+                    },
+                },
+            ],
+        },
+    },
+    layout: {
+        'icon-image': '{icon}-15',
+        'icon-allow-overlap': true,
+    },
+};
+
 // TODO add a placeholder on the map
 export class CommunityMap extends React.Component<
     {},
@@ -53,6 +81,10 @@ export class CommunityMap extends React.Component<
             container: this.mapContainer,
             style: 'mapbox://styles/mapbox/streets-v9',
             zoom,
+        });
+
+        this.map.on('load', () => {
+            this.map.addLayer(places);
         });
 
         this.map.on('move', () => {
